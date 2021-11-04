@@ -1,13 +1,10 @@
 #修改时注意不要破坏空格缩进,yaml不支持Tab键缩进，请使用同等长度空格缩进
 name: mtshenquan-aciton
 on:
-  push:
-    paths-ignore:
-      - 'README.md'
+  watch:
+    types: started
   schedule:
-    - cron: 0 * * * *
-  workflow_dispatch:
-  
+    - cron: '0 3,9,13 * * *' #时间已换算，实际为11，17，21点,但github action 采取排队运行机制，可能导致您的定时计划延后，建议自行根据实际运行情况选择调整或推荐使用终端脚本
 jobs:
   mt-action:
     name: my mt-action job
@@ -41,6 +38,3 @@ jobs:
           setexchangedou: "1800" #必填项目,此处双引号填写当红包豆大于等于多少豆时才执行红包豆转必中符脚本,建议填写1800即可,脚本会在抢不到15元必中符时自动兑换8元必中符
         run: |
           python mt-action-scripts.py
-
- 
-    
